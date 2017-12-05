@@ -9,7 +9,8 @@
   service:
     name: ipsec
     enabled: true
-  when: "{{ ansible_os_family == 'OpenBSD' }}"
+  when:
+    - ansible_os_family == 'OpenBSD'
 
 - name: Create a directory for anchor flagments
   file:
@@ -45,12 +46,14 @@
   # When ipsec.conf is created or updated, cleanup last three copies of
   # ipsec.conf.
   changed_when: false
-  when: "{{ register_ipsec_conf.changed }}"
+  when:
+    - register_ipsec_conf.changed
 
 - name: Validate ipsec.conf
   command: "ipsecctl -n -f {{ isakmpd_conf }}"
   changed_when: false
-  when: "{{ register_ipsec_conf.changed }}"
+  when:
+    - register_ipsec_conf.changed
 
 - name: Start isakmpd
   service:
