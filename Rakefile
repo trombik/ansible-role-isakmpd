@@ -2,7 +2,8 @@ require "pathname"
 
 root_dir = Pathname.new(__FILE__).dirname
 integration_test_dir = root_dir + "tests" + "integration"
-integration_test_dirs = Pathname.new(integration_test_dir).children.select(&:directory?)
+integration_test_dirs = Pathname.new(integration_test_dir)
+                                .children.select(&:directory?)
 
 task default: %w[test]
 
@@ -35,7 +36,7 @@ task :clean do
       begin
         puts "running rake clean"
         sh "rake clean"
-      rescue Exception => e
+      rescue StandardError => e
         puts "rake clean clean failed:"
         puts e.message
         puts e.backtrace.inspect
