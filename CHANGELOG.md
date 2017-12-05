@@ -12,6 +12,6 @@
 * c0653f9 QA
 * 7bbc53d QA
 
-## Release 0.0.0
+## Release 1.0.0
 
-* Initail release
+* Initial release
